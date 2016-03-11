@@ -1,4 +1,7 @@
 var use = require('../controllers/names.js');
+var jwt = require('express-jwt');
+var secret = 'sauce';
+var auth = jwt({secret: secret, userProperty: 'payload'});
 
 module.exports = function(app){
   app.post('/names/new', function(req, res){
@@ -21,4 +24,12 @@ module.exports = function(app){
     use.deleteName(req, res)
   });
 
+  app.post('/register', function(req, res, next){
+    // console.log(req.body);
+    angels.newReg(req, res, next)
+  });
+
+  app.post('/login', function(req, res, next){
+    angels.logIn(req, res, next)
+  });
 }
