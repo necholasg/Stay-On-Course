@@ -15,7 +15,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
 
     .state('index',{
         url: '/',
-        templateUrl: 'static/partials/main.html'
+        templateUrl: 'static/partials/login.html',
+        controller:'loginController'
     })
 
 // ---------------Example Route--------------------------
