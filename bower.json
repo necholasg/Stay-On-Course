@@ -1,0 +1,27 @@
+{
+  "name": "myTemplate",
+  "description": "a template for MEAN",
+  "main": "index.html",
+  "authors": [
+    "Me"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1 - 2",
+    "angular-ui-router": "^0.2.18",
+    "angular-bootstrap": "^1.1.2",
+    "ui-navbar": "^0.4.3",
+    "bootstrap": ">=3.3.2",
+    "angular-auto-validate": "^1.19.3"
+  }
+}

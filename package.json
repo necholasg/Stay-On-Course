@@ -1,0 +1,18 @@
+{
+  "name": "myTemplate",
+  "version": "1.0.0",
+  "description": "a template for MEAN",
+  "main": "index.html",
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "moment": "^2.11.2",
+    "mongoose": "^4.4.2",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  }
+}

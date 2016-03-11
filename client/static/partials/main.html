@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    </style>
+  </head>
+  <body>
+    <div scroll-hide ng-controller='mainController'>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-1 ">
+          <form class="form-group" ng-submit="newName()" novalidate>
+            <h1>Whats Your Name?</h1>
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" placeholder="Name" ng-model='person.name' ng-pattern-err-type='badName' ng-pattern="/^[A-z]+$/" required="required">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <table class="table">
+            <tr>
+              <th class="col-md-1">#</th>
+              <th class="col-md-4">Name</th>
+              <th class="col-md-2">Action</th>
+              <th class="col-md-4">Edit</th>
+            </tr>
+            <tr ng-repeat="name in names">
+              <td>{{$index + 1}}</td>
+              <td>{{name.name}}</td>
+              <td><button type="button" class="btn btn-default btn-sm" ng-click="edit = !edit; getName(name)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <button type="button" class="btn btn-danger btn-sm" ng-click="delete(name)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+              </td>
+              <td>
+                <span  class="inline" ng-hide='edit'>
+                  <form class="form-group" ng-submit='editMe(editName)' novalidate>
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control" ng-model='editName.name' ng-pattern-err-type='badName' ng-pattern="/^[A-z]+$/" required='required'>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" >Update</button>
+                  </form>
+                </span>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
