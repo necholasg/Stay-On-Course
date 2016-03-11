@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate']);
 
 myApp.run(function(defaultErrorMessageResolver){
   defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages){
@@ -16,7 +16,22 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('index',{
         url: '/',
         templateUrl: 'static/partials/login.html',
-        controller:'loginController'
+        controller:'loginController',
+        onEnter: function($state, auth){
+          if(auth.isLoggedIn()){
+            $state.go('home');
+          }
+        }
+    })
+    .state('home',{
+        url: '/home',
+        templateUrl: 'static/partials/loggedIn.html',
+        controller:'mainController',
+        onEnter: function($state, auth){
+          if(!auth.isLoggedIn()){
+            $state.go('index');
+          }
+        }
     })
 
 // ---------------Example Route--------------------------

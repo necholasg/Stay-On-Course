@@ -24,7 +24,6 @@ UserSchema.methods.validPassword = function(password) {
 
 UserSchema.methods.generateJWT = function() {
 
-  // set expiration to 60 days
   var today = new Date();
   var exp = new Date(today);
   exp.setDate(today.getDate() + 1);

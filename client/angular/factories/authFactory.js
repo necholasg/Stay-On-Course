@@ -2,11 +2,11 @@ myApp.factory('auth', function($http, $window, $state){
   var auth = {};
 
   auth.saveToken = function (token){
-    $window.localStorage['angel-token'] = token;
+    $window.localStorage['soc'] = token;
   };
 
   auth.getToken = function (){
-    return $window.localStorage['angel-token'];
+    return $window.localStorage['soc'];
   }
 
   auth.isLoggedIn = function(){
@@ -21,6 +21,10 @@ myApp.factory('auth', function($http, $window, $state){
     }
   };
 
+  $window.onbeforeunload = function(){
+    $window.localStorage.removeItem('soc');
+  }
+
   auth.currentUser = function(){
     if(auth.isLoggedIn()){
       var token = auth.getToken();
@@ -32,7 +36,7 @@ myApp.factory('auth', function($http, $window, $state){
 
   auth.register = function(user){
     return $http.post('/register', user).success(function(data){
-      auth.saveToken(data.token);
+        auth.saveToken(data.token);
     });
   };
 
@@ -43,7 +47,7 @@ myApp.factory('auth', function($http, $window, $state){
   };
 
   auth.logOut = function(){
-    $window.localStorage.removeItem('angel-token');
+    $window.localStorage.removeItem('soc');
     $state.go('index');
   };
 

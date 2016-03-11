@@ -38,19 +38,4 @@ myApp.controller('mainController', function($scope, $window, storageFactory){
     })
   }
 
-
-
-  $scope.tree = [{
-    name: "Temp 1",
-    link: "#"
-  }, {
-    name: "Temp 2",
-    link: "#"
-  },{
-    name: "Temp 3",
-    link: "#"
-  }];
-
-
-
 });

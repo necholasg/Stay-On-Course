@@ -59,15 +59,18 @@ module.exports = {
     })
   },
   newReg: function(req, res, next){
-    if(!req.body.username || !req.body.password){
+    if(!req.body.username || !req.body.password || !req.body.email){
       return res.status(400).json({message: 'Please fill out all fields'});
+    }
+    if(req.body.password !== req.body.confirm_password){
+      return res.status(400).json({message: 'Passwords do not match'})
     }
 
     var user = new User();
 
     user.username = req.body.username;
 
-    user.username = req.body.email;
+    user.email = req.body.email;
 
     user.setPassword(req.body.password)
 

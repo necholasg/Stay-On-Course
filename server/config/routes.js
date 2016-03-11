@@ -26,10 +26,10 @@ module.exports = function(app){
 
   app.post('/register', function(req, res, next){
     // console.log(req.body);
-    angels.newReg(req, res, next)
+    use.newReg(req, res, next)
   });
 
   app.post('/login', function(req, res, next){
-    angels.logIn(req, res, next)
+    use.logIn(req, res, next)
   });
 }
