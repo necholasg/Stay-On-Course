@@ -31,7 +31,7 @@ myApp.controller('authController', function($scope, $state, auth){
   };
 })
 
-myApp.controller('NavCtrl', function($scope, auth){
+myApp.controller('NavCtrl', function($scope, auth,$uibModal){
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.currentUser = auth.currentUser;
     $scope.logOut = auth.logOut;
@@ -46,4 +46,21 @@ myApp.controller('NavCtrl', function($scope, auth){
       name: "Temp 3",
       link: "#"
     }];
+
+    $scope.open = function (size) {
+      var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'postForm.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+      options: function () {
+        return ["Prospective","Applied","Pending","Completed"];
+        }
+      }
+      });
+    }
+
+
+
   });

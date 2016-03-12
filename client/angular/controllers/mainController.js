@@ -1,45 +1,80 @@
-myApp.controller('mainController', function($scope, $window, storageFactory, $timeout, ngToast){
-  var toastMe = function(){
-    ngToast.create({
-    className: 'success',
-    content: '<p>Search Complete!</p>'
-    });
-  }
-  var toastMeNo = function(){
-    ngToast.create({
-    className: 'danger',
-    content: '<p>Sorry, no results. Try again :(</p>'
-    });
-  }
+myApp.controller('mainController', function($scope, $window, auth, postFactory,$uibModal){
 
-  $scope.newSearch = function(){
-    if($scope.jobSearch.state){
-      $scope.jobSearch.state = $scope.jobSearch.state.abbreviation;
-    };
-    storageFactory.newSearch($scope.jobSearch, function(data){
-      console.log(data);
-      $scope.jobs = [];
-      if(data.length === 0){
-        console.log("nothing to display");
-        toastMeNo();
-        $scope.jobSearch = {};
-      }else if(data.dice && data.git){
-        $scope.dice = data.dice.resultItemList;
-        $scope.git = data.git;
-        $scope.jobs = $scope.dice.concat($scope.git)
-        $scope.jobSearch = {};
-        toastMe();
-      }else if(data.resultItemList){
-        $scope.jobs = data.resultItemList;
-        $scope.jobSearch = {};
-        toastMe();
-      }else{
-        $scope.jobs = data;
-        $scope.jobSearch = {};
-        toastMe();
+  $scope.posts = [];
+
+  $scope.models = {
+      selected: null,
+      lists: {"Prospects": [], "Applied": [], "Pending":[], "Completed": []}
+  };
+
+
+  $scope.get = function() {
+    console.log("getting");
+
+    postFactory.allPosts(function(data){
+    posts = data;
+    for (i in posts) {
+      switch(posts[i].status){
+        case "Prospective":
+          $scope.models.lists.Prospects.push(posts[i]);
+          break;
+        case "Applied":
+          $scope.models.lists.Applied.push(posts[i]);
+          break;
+        case "Pending":
+          $scope.models.lists.Pending.push(posts[i]);
+          break;
+        case "Completed":
+          $scope.models.lists.Completed.push(posts[i]);
+          break;
       }
+    };
+    });
+  }
 
-    })
+  $scope.get();
+
+
+  $scope.test = function (){
+    $scope.models.lists.Completed.push({'job_title':'test','company_name':'testtt'});
+    console.log($scope.models.lists);
+  }
+
+    $scope.open = function (size) {
+
+      var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'postForm.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+      options: function () {
+        return ["Prospective","Applied","Pending","Completed"];
+        }
+      }
+      });
+
+      modalInstance.result.then(function(data) {
+          $scope.get();
+        });
+    };
+
+
+});
+
+
+
+
+
+myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory) {
+  $scope.options = options;
+
+  $scope.submitPost = function() {
+    postFactory.addPost($scope.newPost,function(data){
+      $scope.newPost = {};
+      $uibModalInstance.close(data);
+    });
+>>>>>>> f46eefde804f777269906c6bf2419daef43ce963
   }
   $scope.searchForm = function(){
     $timeout(function(){$scope.resetForm();},1500);
@@ -53,5 +88,9 @@ myApp.controller('mainController', function($scope, $window, storageFactory, $ti
     // console.log($scope.states);
   })
 
+
+  $scope.cancel = function () {
+    $uibModalInstance.close('cancel');
+  };
 
 });

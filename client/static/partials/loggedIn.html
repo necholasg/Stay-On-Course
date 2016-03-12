@@ -4,73 +4,108 @@
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+  <body ng-controller="mainController">
+
+    <h1>Demo: Simple Lists</h1>
+
     <div class="row">
 
-      <div class="col-md-12">
-        <div class="page-header">
-          <h1>Job Search</h1>
+        <div class="col-md-12">
+            <div class="row">
+                <div ng-repeat="(listName, list) in models.lists" class="col-md-3">
+                    <div class="panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{listName}}</h3>
+                        </div>
+                        <div class="panel-body">
+                          <ul dnd-list="list">
+                            <li ng-repeat="item in list"
+                                dnd-draggable="item"
+                                dnd-moved="list.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="models.selected = item"
+                                ng-class="{'selected': models.selected === item}"
+                                >
+                                {{item.job_title}} - {{item.company_name}}
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <toast></toast>
-      <div class="col-md-12">
-        <div class="col-md-3">
-          <h4>Please Select at least one</h4>
-          <form name="searchMe" ng-click="searchForm()" role='form' ng-submit="newSearch()" novalidate>
-            <div class="checkbox form-group">
-              <label><input type="checkbox" ng-model="jobSearch.dice">Dice</label>
-              <div ng-if="jobSearch.dice" style="display:inline">
-
-                <select style="width:100px; display:inline; margin-left:40px;" class="form-control" type="text" name="state" ng-options="states.abbreviation for states in states" ng-model="jobSearch.state" required>
-                  <option value="" disabled="">Select</option>
-                </select>
-              </div>
-
-            </div>
-            <div class="checkbox form-group">
-              <label><input type="checkbox" ng-model="jobSearch.gitHub">GitHub Jobs</label>
-            </div>
-            <!-- <div class="checkbox disabled">
-              <label><input type="checkbox" value="" disabled>Option 3</label>
-            </div> -->
-            <div class="form-group">
-              <label for="job_type">Job Type</label>
-              <input type="text" ng-model="jobSearch.jobType" class="form-control" id="job_type" required>
-            </div>
-            <div class="form-group">
-              <label for="location">Location</label>
-              <input type="text" ng-model="jobSearch.location" class="form-control" id="location" required>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-        </div>
-        <div class="col-md-9">
-          <h2>Results</h2>
-          <div class="results">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th class='col-md-5'>Title</th>
-                  <th class='col-md-2'>Location</th>
-                  <th class='col-md-1'>Type</th>
-                  <th class='col-md-2'>Company</th>
-                  <th class='col-md-2'>See Posting</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="job in jobs">
-                  <td>{{job.title}}{{job.jobTitle}}</td>
-                  <td>{{job.location}}</td>
-                  <td>{{job.type}}</td>
-                  <td>{{job.company}}</td>
-                  <td><a class="btn btn-primary" href="{{job.url}}{{job.detailUrl}}" target="_blank">Go to Site</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
 
     </div>
+      <button ng-click="test()">TEST</button>
+
+  <hr>
+  <!-- Job Search- -->
+
+    <div class="row" ng-controller="jobSearchController">
+
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>Job Search</h1>
+      </div>
+    </div>
+    <toast></toast>
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <h4>Please Select at least one</h4>
+        <form name="searchMe" ng-click="searchForm()" role='form' ng-submit="newSearch()" novalidate>
+          <div class="checkbox form-group">
+            <label><input type="checkbox" ng-model="jobSearch.dice">Dice</label>
+            <div ng-if="jobSearch.dice" style="display:inline">
+
+              <select style="width:100px; display:inline; margin-left:40px;" class="form-control" type="text" name="state" ng-options="states.abbreviation for states in states" ng-model="jobSearch.state" required>
+                <option value="" disabled="">Select</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="checkbox form-group">
+            <label><input type="checkbox" ng-model="jobSearch.gitHub">GitHub Jobs</label>
+          </div>
+          <!-- <div class="checkbox disabled">
+            <label><input type="checkbox" value="" disabled>Option 3</label>
+          </div> -->
+          <div class="form-group">
+            <label for="job_type">Job Type</label>
+            <input type="text" ng-model="jobSearch.jobType" class="form-control" id="job_type" required>
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" ng-model="jobSearch.location" class="form-control" id="location" required>
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-9">
+        <h2>Results</h2>
+        <div class="results">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class='col-md-5'>Title</th>
+                <th class='col-md-2'>Location</th>
+                <th class='col-md-1'>Type</th>
+                <th class='col-md-2'>Company</th>
+                <th class='col-md-2'>See Posting</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="job in jobs">
+                <td>{{job.title}}{{job.jobTitle}}</td>
+                <td>{{job.location}}</td>
+                <td>{{job.type}}</td>
+                <td>{{job.company}}</td>
+                <td><a class="btn btn-primary" href="{{job.url}}{{job.detailUrl}}" target="_blank">Go to Site</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

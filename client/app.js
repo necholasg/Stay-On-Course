@@ -1,4 +1,5 @@
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate', 'ngToast', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate', 'ngToast', 'ngSanitize', 'dndLists']);
+
 
 myApp.run(function(defaultErrorMessageResolver){
   defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages){

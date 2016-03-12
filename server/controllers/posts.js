@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Name = mongoose.model('Name');
+var Post = mongoose.model('Post');
 var User = mongoose.model('User');
 var State = mongoose.model('State');
 var passport = require('passport');
@@ -7,8 +7,8 @@ var jwt = require('express-jwt');
 var secret = 'sauce';
 var auth = jwt({secret: secret, userProperty: 'payload'});
 
-
 module.exports = {
+
   getStates: function(req, res){
     State.find({}, function(err, states){
       if(err){
@@ -20,36 +20,60 @@ module.exports = {
       }
     })
   },
-  getName: function(req, res){
-    Name.findOne({_id:req.params.id}, function(err, name){
+  newPost: function(req, res){
+    var new_post = new Post(req.body)
+    new_post.save(function(err, post){
       if(err){
-        console.log('Error in get Names');
-        res.json({status: 'error'})
+        res.json({status:'error'})
       }else{
-        res.json(name)
+        res.json(post)
       }
     })
   },
-  updateName: function(req, res){
-    Name.update({_id:req.body._id},{name:req.body.name}, function(err, name){
+  getPosts: function(req, res){
+    Post.find({_user: req.params._id}, function(err, posts){
       if(err){
-        console.log('Error in update Names');
+        console.log('Error in get Posts');
         res.json({status: 'error'})
       }else{
-        res.json(name)
+        res.json(posts)
       }
     })
   },
-  deleteName: function(req, res){
-    Name.remove({_id:req.params.id}, function(err, name){
+
+  getLast: function(req,res){
+    Post.findOne({_user: req.params._id}, {}, { sort: { 'created_at' : -1 } }, function(err,post){
+        if(err){
+          console.log('Error in get Posts');
+          res.json({status: 'error'})
+        }
+        else{
+          res.json(post);
+        }
+    })
+  },
+
+  updatePost: function(req, res){
+    Post.update(req.body, function(err, post){
       if(err){
-        console.log('Error in delete Name');
+        console.log('Error in update Posts');
         res.json({status: 'error'})
       }else{
-        res.json(name)
+        res.json(post)
       }
     })
   },
+  deletePost: function(req, res){
+    Post.remove({_id:req.params.id}, function(err, post){
+      if(err){
+        console.log('Error in delete Post');
+        res.json({status: 'error'})
+      }else{
+        res.json(post)
+      }
+    })
+  },
+
   newReg: function(req, res, next){
     if(!req.body.username || !req.body.password || !req.body.email){
       return res.status(400).json({message: 'Please fill out all fields'});
