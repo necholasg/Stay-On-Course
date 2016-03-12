@@ -12,7 +12,7 @@
     <!-- Ui router and app instatiation -->
     <script src='/app.js'></script>
     <!-- Factories -->
-    <script src='./angular/factories/storageFactory.js'></script>
+    <script src='./angular/factories/postFactory.js'></script>
     <script src='./angular/factories/authFactory.js'></script>
     <!-- Controllers -->
     <script src='./angular/controllers/mainController.js'></script>
@@ -25,6 +25,7 @@
     <script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="./bower_components/ui-navbar/release/js/ui-navbar.js"></script>
     <script src="./bower_components/angular-auto-validate/dist/jcs-auto-validate.js"></script>
+    <script src="./bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
     <!-- Other addons -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -60,9 +61,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-
-              <li ng-show="isLoggedIn()"><a><span class="glyphicon glyphicon-user"></span>  {{ currentUser() }}</a></li>
-              <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+              <li ng-controller="mainController"><a ng-click="open('large')"><span class="glyphicon glyphicon-plus"></span></a></li>
+              <li><a><span class="glyphicon glyphicon-user"></span>  {{ currentUser() }}</a></li>
+              <li><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
 
           </div>
@@ -72,8 +73,50 @@
       </nav>
       <div class='container-fluid' ui-view>
 
-
       </div>
     </div>
   </body>
 </html>
+
+
+
+<script type="text/ng-template" id="postForm.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Post a sticky</h3>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="job_title">Job Title:</label>
+              <input type="text" ng-model="newPost.job_title">
+            </div>
+            <div class="form-group">
+              <label for="company_name">Company:</label>
+              <input type="text" ng-model="newPost.company_name">
+            </div>
+            <div class="form-group">
+              <label for="location">Location:</label>
+              <input type="text" ng-model="newPost.location">
+            </div>
+            <div class="form-group">
+              <label for="salary">Prospective Salary:</label>
+              <input type="text" ng-model="newPost.salary">
+            </div>
+            <div class="form-group">
+              <label for="url">URL:</label>
+              <input type="text" ng-model="newPost.url">
+            </div>
+            <div class="form-group">
+              <label for="status">Status:</label>
+              <select ng-init="newPost.status = options[0]" ng-model="newPost.status" ng-options="option for option in options">
+              </select>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="submitPost()">Post</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+</script>
+

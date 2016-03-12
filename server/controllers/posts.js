@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Name = mongoose.model('Name');
+var Post = mongoose.model('Post');
 var User = mongoose.model('User');
 var passport = require('passport');
 var jwt = require('express-jwt');
@@ -7,57 +7,60 @@ var secret = 'sauce';
 var auth = jwt({secret: secret, userProperty: 'payload'});
 
 module.exports = {
-  newName: function(req, res){
-    var new_name = new Name({name:req.body.name})
-
-    new_name.save(function(err, name){
+  newPost: function(req, res){
+    var new_post = new Post(req.body)
+    new_post.save(function(err, post){
       if(err){
         res.json({status:'error'})
       }else{
-        res.json(name)
+        res.json(post)
       }
     })
   },
-  getNames: function(req, res){
-    Name.find({}, function(err, names){
+  getPosts: function(req, res){
+    Post.find({_user: req.params._id}, function(err, posts){
       if(err){
-        console.log('Error in get Names');
+        console.log('Error in get Posts');
         res.json({status: 'error'})
       }else{
-        res.json(names)
+        res.json(posts)
       }
     })
   },
-  getName: function(req, res){
-    Name.findOne({_id:req.params.id}, function(err, name){
+
+  getLast: function(req,res){
+    Post.findOne({_user: req.params._id}, {}, { sort: { 'created_at' : -1 } }, function(err,post){
+        if(err){
+          console.log('Error in get Posts');
+          res.json({status: 'error'})
+        }
+        else{
+          res.json(post);
+        }
+    })
+  },
+
+  updatePost: function(req, res){
+    Post.update(req.body, function(err, post){
       if(err){
-        console.log('Error in get Names');
+        console.log('Error in update Posts');
         res.json({status: 'error'})
       }else{
-        res.json(name)
+        res.json(post)
       }
     })
   },
-  updateName: function(req, res){
-    Name.update({_id:req.body._id},{name:req.body.name}, function(err, name){
+  deletePost: function(req, res){
+    Post.remove({_id:req.params.id}, function(err, post){
       if(err){
-        console.log('Error in update Names');
+        console.log('Error in delete Post');
         res.json({status: 'error'})
       }else{
-        res.json(name)
+        res.json(post)
       }
     })
   },
-  deleteName: function(req, res){
-    Name.remove({_id:req.params.id}, function(err, name){
-      if(err){
-        console.log('Error in delete Name');
-        res.json({status: 'error'})
-      }else{
-        res.json(name)
-      }
-    })
-  },
+
   newReg: function(req, res, next){
     if(!req.body.username || !req.body.password || !req.body.email){
       return res.status(400).json({message: 'Please fill out all fields'});
