@@ -21,9 +21,9 @@ myApp.factory('auth', function($http, $window, $state){
     }
   };
 
-  $window.onbeforeunload = function(){
-    $window.localStorage.removeItem('soc');
-  }
+  // $window.onbeforeunload = function(){
+  //   $window.localStorage.removeItem('soc');
+  // }
 
   auth.currentUser = function(){
     if(auth.isLoggedIn()){

@@ -4,3 +4,10 @@ body{
 	padding-top: 60px;
 	font-family: 'Open Sans', sans-serif;
 }
+.border{
+	border: red 1px solid;
+}
+.results{
+	height: 70vh;
+	overflow: scroll;
+}

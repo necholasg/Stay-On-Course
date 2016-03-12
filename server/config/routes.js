@@ -2,14 +2,45 @@ var use = require('../controllers/names.js');
 var jwt = require('express-jwt');
 var secret = 'sauce';
 var auth = jwt({secret: secret, userProperty: 'payload'});
+var request = require('request');
 
 module.exports = function(app){
-  app.post('/names/new', function(req, res){
-    use.newName(req, res)
+  app.post('/newSearch', function(req, res){
+    var pack = {};
+
+    if(req.body.gitHub === true && req.body.dice === true){
+      request('https://jobs.github.com/positions.json?description='+req.body.jobType+'&location='+req.body.location, function(err, data, body){
+
+        pack.git = JSON.parse(body);
+        if(req.body.dice === true){
+          request('http://service.dice.com/api/rest/jobsearch/v1/simple.json?text='+req.body.jobType+'&city='+req.body.location+','+req.body.state, function(err, data, body){
+
+            pack.dice = JSON.parse(body);
+            res.json(pack)
+          })
+        }
+      })
+    }
+    else if(req.body.gitHub === true && !req.body.dice === true){
+      request('https://jobs.github.com/positions.json?description='+req.body.jobType+'&location='+req.body.location, function(err, data, body){
+
+        res.json(JSON.parse(body));
+      })
+    }
+
+    else if(!req.body.gitHub === true && req.body.dice === true){
+      request('http://service.dice.com/api/rest/jobsearch/v1/simple.json?text='+req.body.jobType+'&city='+req.body.location+','+req.body.state, function(err, data, body){
+
+
+        res.json(JSON.parse(body))
+      })
+    }
+
+
   });
 
-  app.get('/names', function(req, res){
-    use.getNames(req, res)
+  app.get('/states', function(req, res){
+    use.getStates(req, res)
   });
 
   app.get('/name/:id', function(req, res){

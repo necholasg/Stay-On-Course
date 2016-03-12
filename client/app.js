@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate', 'ngToast', 'ngSanitize']);
 
 myApp.run(function(defaultErrorMessageResolver){
   defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages){
@@ -6,6 +6,14 @@ myApp.run(function(defaultErrorMessageResolver){
     });
   }
 );
+
+myApp.config(['ngToastProvider', function(ngToast) {
+    ngToast.configure({
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      maxNumber: 1
+    });
+  }]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
 

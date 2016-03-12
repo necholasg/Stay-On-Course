@@ -1,30 +1,22 @@
 var mongoose = require('mongoose');
 var Name = mongoose.model('Name');
 var User = mongoose.model('User');
+var State = mongoose.model('State');
 var passport = require('passport');
 var jwt = require('express-jwt');
 var secret = 'sauce';
 var auth = jwt({secret: secret, userProperty: 'payload'});
 
-module.exports = {
-  newName: function(req, res){
-    var new_name = new Name({name:req.body.name})
 
-    new_name.save(function(err, name){
+module.exports = {
+  getStates: function(req, res){
+    State.find({}, function(err, states){
       if(err){
-        res.json({status:'error'})
-      }else{
-        res.json(name)
-      }
-    })
-  },
-  getNames: function(req, res){
-    Name.find({}, function(err, names){
-      if(err){
-        console.log('Error in get Names');
+        console.log('Error in get states');
         res.json({status: 'error'})
       }else{
-        res.json(names)
+        // console.log(states);
+        res.json(states)
       }
     })
   },
