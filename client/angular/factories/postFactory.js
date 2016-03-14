@@ -5,7 +5,7 @@ myApp.factory('postFactory', function($http, $state, auth){
   factory.addPost = function(newPost, lists, callback){
 
       switch(newPost.status){
-        case "Prospects": 
+        case "Prospects":
           newPost.index = lists.Prospects.length
           break;
         case "Applied":

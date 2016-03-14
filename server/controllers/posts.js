@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
-var State = mongoose.model('State');
 var passport = require('passport');
 var jwt = require('express-jwt');
 var secret = 'sauce';
@@ -54,6 +53,7 @@ module.exports = {
   },
 
   updatePost: function(req, res){
+    console.log('HERE');
     Post.update({_id:req.body._id}, req.body, function(err, post){
       if(err){
         console.log('Error in update Posts');

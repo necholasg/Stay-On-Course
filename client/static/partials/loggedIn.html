@@ -22,7 +22,7 @@
                         </div>
                         <div class="panel-body">
                           <ul dnd-list="list"
-                              dnd-inserted="newCardLocation($index, index, item, listName)">
+                              dnd-inserted="newCardLocation(index, item, listName)">
                             <li ng-repeat="item in list"
                                 dnd-draggable="item"
                                 dnd-moved="list.splice($index, 1)"

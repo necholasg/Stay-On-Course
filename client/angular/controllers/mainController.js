@@ -65,6 +65,7 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
         }
       }
     })
+  }
 
     $scope.open = function (size) {
 

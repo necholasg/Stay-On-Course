@@ -39,10 +39,6 @@ module.exports = function(app){
 
   });
 
-  app.get('/states', function(req, res){
-    use.getStates(req, res)
-  });
-
   app.post('/posts/new', function(req, res){
     use.newPost(req, res)
   });

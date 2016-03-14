@@ -13,15 +13,6 @@ myApp.factory('storageFactory', function($http, $state){
 
 
   };
-  factory.allStates = function(callback){
-    $http.get('/states').success(function(res){
-      if(res.status == 'error'){
-        console.log('error in loading states');
-      }else{
-        callback(res)
-      };
-    });
-  };
 
   return factory;
 })
