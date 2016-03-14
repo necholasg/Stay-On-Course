@@ -87,11 +87,12 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th class='col-md-5'>Title</th>
+                <th class='col-md-4'>Title</th>
                 <th class='col-md-2'>Location</th>
                 <th class='col-md-1'>Type</th>
                 <th class='col-md-2'>Company</th>
                 <th class='col-md-2'>See Posting</th>
+                <th class='col-md-1'>Add Job</th>
               </tr>
             </thead>
             <tbody>
@@ -101,6 +102,7 @@
                 <td>{{job.type}}</td>
                 <td>{{job.company}}</td>
                 <td><a class="btn btn-primary" href="{{job.url}}{{job.detailUrl}}" target="_blank">Go to Site</a></td>
+                <td><span ng-click="openMe('large', job)" class="fa fa-plus-square text-primary fa-2x"></span></td>
               </tr>
             </tbody>
           </table>

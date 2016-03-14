@@ -1,6 +1,7 @@
 myApp.factory('postFactory', function($http, $state, auth){
   factory = {};
   posts = [];
+  list = {};
 
   factory.addPost = function(newPost, lists, callback){
 

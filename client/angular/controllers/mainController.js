@@ -100,6 +100,42 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
         });
     };
 
+    $scope.openMe = function (size, job) {
+
+      var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'postForm.html',
+      controller: 'jobModalInstanceCtrl',
+      size: size,
+      resolve: {
+      options: function () {
+        return ["Prospects","Applied","Pending","Completed"];
+        },
+      job: function(){
+        return job;
+      },
+      lists: function(){
+        return $scope.models.lists;
+      }
+      }
+      });
+
+      modalInstance.result.then(function(data) {
+        if (data.status == "Completed") {
+          $scope.models.lists.Completed.push(data);
+        }
+        if (data.status == "Prospects") {
+          $scope.models.lists.Prospects.push(data);
+        }
+        if (data.status == "Applied") {
+          $scope.models.lists.Applied.push(data);
+        }
+        if (data.status == "Pending") {
+          $scope.models.lists.Pending.push(data);
+        }
+        });
+    };
+
 });
 
 

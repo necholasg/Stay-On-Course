@@ -1,14 +1,14 @@
-myApp.controller('jobSearchController', function($scope, $window, storageFactory, $timeout, ngToast){
+myApp.controller('jobSearchController', function($scope, $window, storageFactory, $timeout, ngToast, $uibModal){
   var toastMe = function(){
     ngToast.create({
     className: 'success',
-    content: '<p>Search Complete!</p>'
+    content: '<a>Search Complete!</a>'
     });
   }
   var toastMeNo = function(){
     ngToast.create({
     className: 'danger',
-    content: '<p>Sorry, no results. Try again!</p>'
+    content: '<a>Sorry, no results. Try again!</a>'
     });
   }
 
@@ -17,7 +17,7 @@ myApp.controller('jobSearchController', function($scope, $window, storageFactory
       $scope.jobSearch.state = $scope.jobSearch.state.abbreviation;
     };
     storageFactory.newSearch($scope.jobSearch, function(data){
-      console.log(data);
+      // console.log(data);
       $scope.jobs = [];
       if(data.length === 0){
         console.log("nothing to display");
@@ -49,4 +49,26 @@ myApp.controller('jobSearchController', function($scope, $window, storageFactory
   }
 
   $scope.states = getStates();
+
+});
+
+myApp.controller('jobModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory, job, lists) {
+  $scope.options = options;
+  $scope.newPost = {};
+  $scope.newPost.job_title = job.title || job.jobTitle;
+  $scope.newPost.company_name = job.company;
+  $scope.newPost.location = job.location;
+  $scope.newPost.url = job.url || job.detailUrl;
+
+  $scope.submitPost = function() {
+    postFactory.addPost($scope.newPost,lists,function(data){
+      $scope.newPost = {};
+      $uibModalInstance.close(data);
+    });
+  }
+
+  $scope.cancel = function () {
+    $uibModalInstance.close('cancel');
+  };
+
 });
