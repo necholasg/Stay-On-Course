@@ -9,6 +9,7 @@ var postSchema = new mongoose.Schema({
   status: String,
   url: String,
   notes: String,
+  index: Number,
   created_at: { type: Date, default: Date.now }
 })
 mongoose.model('Post', postSchema);

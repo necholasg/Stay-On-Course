@@ -2,6 +2,6 @@ var mongoose = require('mongoose');
 
 
 var stateSchema = new mongoose.Schema({
-  states: {}
+  states: []
 })
 mongoose.model('State', stateSchema);

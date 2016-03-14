@@ -1,4 +1,5 @@
-[{"name": "Alabama",
+var getStates = function() {
+	return [{"name": "Alabama",
 "abbreviation": "AL"},
 {"name": "Alaska",
 "abbreviation": "AK"},
@@ -116,3 +117,5 @@
 "abbreviation": "WI"},
 {"name": "Wyoming",
 "abbreviation": "WY"}]
+}
+

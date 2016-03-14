@@ -2,7 +2,22 @@ myApp.factory('postFactory', function($http, $state, auth){
   factory = {};
   posts = [];
 
-  factory.addPost = function(newPost, callback){
+  factory.addPost = function(newPost, lists, callback){
+
+      switch(newPost.status){
+        case "Prospects": 
+          newPost.index = lists.Prospects.length
+          break;
+        case "Applied":
+          newPost.index = lists.Applied.length
+          break;
+        case "Pending":
+          newPost.index = lists.Pending.length
+          break;
+        case "Completed":
+          newPost.index = lists.Completed.length
+          break;
+      }
     newPost._user = auth.currentUserID();
     $http.post('/posts/new', newPost).success(function(res){
       if(res.status == 'error'){
@@ -38,7 +53,7 @@ myApp.factory('postFactory', function($http, $state, auth){
   factory.editPost = function(post, callback){
     $http.post('/posts/edit/', post).success(function(res){
       if(res.status == 'error'){
-        console.log('error in editing name');
+        console.log('error in editing post');
       }else{
         callback(res)
       };
