@@ -53,6 +53,7 @@ module.exports = {
   },
 
   updatePost: function(req, res){
+    console.log('HERE');
     Post.update({_id:req.body._id}, req.body, function(err, post){
       if(err){
         console.log('Error in update Posts');

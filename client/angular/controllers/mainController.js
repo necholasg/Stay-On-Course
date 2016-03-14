@@ -13,7 +13,6 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
   $scope.get = function() {
 
     postFactory.allPosts(function(data){
-    // console.log(data);
     posts = data;
     for (i in posts) {
       switch(posts[i].status){
@@ -33,6 +32,7 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
     };
     });
   }
+
   $scope.get();
 
   $scope.newCardLocation = function(index, item, listName){
@@ -56,7 +56,6 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
 
       for (var key in $scope.models.lists){
         for (i in $scope.models.lists[key]){
-
           if ($scope.models.lists[key][i] != null ){
             var updating_object = $scope.models.lists[key][i];
             updating_object.index = $scope.models.lists[key].indexOf(updating_object);
@@ -66,9 +65,7 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
         }
       }
     })
-
   }
-
 
     $scope.open = function (size) {
 
