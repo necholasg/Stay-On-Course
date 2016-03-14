@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
-var State = mongoose.model('State');
 var passport = require('passport');
 var jwt = require('express-jwt');
 var secret = 'sauce';

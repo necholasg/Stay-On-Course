@@ -31,7 +31,6 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
           break;
       }
     };
-    console.log($scope.models);
     });
   }
   $scope.get();
