@@ -8,10 +8,12 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
   };
 
 
+
   $scope.get = function() {
     console.log("getting");
 
     postFactory.allPosts(function(data){
+    // console.log(data);
     posts = data;
     for (i in posts) {
       switch(posts[i].status){
@@ -29,13 +31,41 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
           break;
       }
     };
+    console.log($scope.models);
     });
   }
+$scope.get();
+// console.log("times");
 
-  $scope.get();
+  // $scope.$watch('package', function() {
+  //   console.log('HERERHERHEREHRER');
+  //   $scope.models.lists.Completed.push(package);
+  //   console.log($scope.models.lists.Completed);
+  // });
+  // $scope.delivery = function(){
+  //   console.log(package);
+  //   $scope.posts.push(package);
+  //   $scope.get();
+  //   console.log("after get");
+  // }
+  // var package;
+
+  // $scope.listMoved = function(data){
+  //   console.log(data);
+  // }
+
+  $scope.newCardLocation = function(index, item, listName){
+
+    item.newLocation = listName;
+    item.newIndex = index;
+    postFactory.editPost(item, function(){
+
+    })
+  }
 
 
   $scope.test = function (){
+    console.log("got here");
     $scope.models.lists.Completed.push({'job_title':'test','company_name':'testtt'});
     console.log($scope.models.lists);
   }
@@ -55,7 +85,29 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
       });
 
       modalInstance.result.then(function(data) {
-          $scope.get();
+        if (data.status == "Completed") {
+          $scope.models.lists.Completed.push(data);
+        }
+        if (data.status == "Prospective") {
+          $scope.models.lists.Prospects.push(data);
+        }
+        if (data.status == "Applied") {
+          $scope.models.lists.Applied.push(data);
+        }
+        if (data.status == "Pending") {
+          $scope.models.lists.Pending.push(data);
+        }
+        console.log(data);
+        // console.log("above");
+        // $scope.get();
+        // console.log($scope.models);
+        // console.log("below");
+
+        // $scope.test();
+        // package = data;
+        // $scope.delivery();
+        // console.log(package);
+        // console.log($scope);
         });
     };
 
@@ -74,20 +126,7 @@ myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,option
       $scope.newPost = {};
       $uibModalInstance.close(data);
     });
->>>>>>> f46eefde804f777269906c6bf2419daef43ce963
   }
-  $scope.searchForm = function(){
-    $timeout(function(){$scope.resetForm();},1500);
-  }
-  $scope.resetForm = function(){
-    $scope.searchMe.$setPristine();
-  }
-
-  storageFactory.allStates(function(data){
-    $scope.states = data[0].states
-    // console.log($scope.states);
-  })
-
 
   $scope.cancel = function () {
     $uibModalInstance.close('cancel');

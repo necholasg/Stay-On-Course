@@ -41,4 +41,15 @@ myApp.controller('jobSearchController', function($scope, $window, storageFactory
 
     })
   };
-})
+  $scope.searchForm = function(){
+    $timeout(function(){$scope.resetForm();},1500);
+  }
+  $scope.resetForm = function(){
+    $scope.searchMe.$setPristine();
+  }
+
+  storageFactory.allStates(function(data){
+    $scope.states = data[0].states
+    // console.log($scope.states);
+  })
+});

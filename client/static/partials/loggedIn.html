@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body ng-controller="mainController">
+  <body>
 
-    <h1>Demo: Simple Lists</h1>
+    <div class="row fullpage">
+      <div class="col-md-12 page-header">
+        <h1>Demo: Simple Lists</h1>
+        <a ng-click="open('large')"><span class="glyphicon glyphicon-plus"></span></a>
+      </div>
 
-    <div class="row">
 
         <div class="col-md-12">
             <div class="row">
@@ -18,7 +21,8 @@
                             <h3 class="panel-title">{{listName}}</h3>
                         </div>
                         <div class="panel-body">
-                          <ul dnd-list="list">
+                          <ul dnd-list="list"
+                              dnd-inserted="newCardLocation(index, item, listName)">
                             <li ng-repeat="item in list"
                                 dnd-draggable="item"
                                 dnd-moved="list.splice($index, 1)"
@@ -35,8 +39,13 @@
             </div>
         </div>
 
+        <button ng-click="test()">TEST</button>
+        <div ng-repeat="list in models.lists.Completed" class="">
+          <p>{{list.job_title}}</p>
+
+        </div>
     </div>
-      <button ng-click="test()">TEST</button>
+
 
   <hr>
   <!-- Job Search- -->
