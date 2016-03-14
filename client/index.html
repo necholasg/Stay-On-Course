@@ -68,7 +68,6 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a ng-click="open('large')"><span class="glyphicon glyphicon-plus"></span></a></li>
               <li><a><span class="glyphicon glyphicon-user"></span>  {{ currentUser() }}</a></li>
               <li><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
@@ -126,7 +125,46 @@
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="submitPost()">Post</button>
+            <button class="btn btn-primary" type="button" ng-click="submitPost()"><span class="glyphicon glyphicon-pushpin"></span></button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+</script>
+
+<script type="text/ng-template" id="editForm.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{newPost.job_title}}</h3>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="job_title">Job Title:</label>
+              <input class="form-control" type="text" ng-model="newPost.job_title">
+            </div>
+            <div class="form-group">
+              <label for="company_name">Company:</label>
+              <input class="form-control" type="text" ng-model="newPost.company_name">
+            </div>
+            <div class="form-group">
+              <label for="location">Location:</label>
+              <input class="form-control" type="text" ng-model="newPost.location">
+            </div>
+            <div class="form-group">
+              <label for="salary">Prospective Salary:</label>
+              <input class="form-control" type="text" ng-model="newPost.salary">
+            </div>
+            <div class="form-group">
+              <label for="url">URL:</label>
+              <input class="form-control" type="text" ng-model="newPost.url">
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes:</label>
+              <textarea class="form-control" rows="5" ng-model="newPost.notes"></textarea>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="updatePost()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
 </script>
