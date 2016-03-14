@@ -30,7 +30,7 @@
                                 dnd-selected="models.selected = item"
                                 ng-class="{'selected': models.selected === item}"
                                 >
-                                {{item.job_title}} - {{item.company_name}}
+                                {{item.job_title}} - {{item.company_name}} <button class="btn btn-xs" ng-click="edit('large',item)"><span class="glyphicon glyphicon-pencil"></span></button>
                             </li>
                           </ul>
                         </div>
