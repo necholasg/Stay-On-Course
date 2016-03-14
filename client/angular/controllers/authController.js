@@ -47,19 +47,6 @@ myApp.controller('NavCtrl', function($scope, auth,$uibModal){
       link: "#"
     }];
 
-    $scope.open = function (size) {
-      var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'postForm.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-      options: function () {
-        return ["Prospective","Applied","Pending","Completed"];
-        }
-      }
-      });
-    }
 
 
 

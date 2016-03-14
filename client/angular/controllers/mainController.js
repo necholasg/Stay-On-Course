@@ -1,5 +1,6 @@
 myApp.controller('mainController', function($scope, $window, auth, postFactory,$uibModal){
 
+
   $scope.posts = [];
 
   $scope.models = {
@@ -10,35 +11,60 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
 
 
   $scope.get = function() {
-    console.log("getting");
 
     postFactory.allPosts(function(data){
     posts = data;
     for (i in posts) {
       switch(posts[i].status){
-        case "Prospective":
-          $scope.models.lists.Prospects.push(posts[i]);
+        case "Prospects":
+          $scope.models.lists.Prospects[posts[i].index] = posts[i];
           break;
         case "Applied":
-          $scope.models.lists.Applied.push(posts[i]);
+          $scope.models.lists.Applied[posts[i].index] = posts[i];
           break;
         case "Pending":
-          $scope.models.lists.Pending.push(posts[i]);
+          $scope.models.lists.Pending[posts[i].index] = posts[i];
           break;
         case "Completed":
-          $scope.models.lists.Completed.push(posts[i]);
+          $scope.models.lists.Completed[posts[i].index] = posts[i];
           break;
       }
     };
     });
   }
-$scope.get();
 
+  $scope.get();
 
-  $scope.test = function(){
-    console.log($scope.models.lists);
-  }
+  $scope.newCardLocation = function(index, item, listName){
+    item.status = listName;
+    switch(item.status){
+        case "Prospects":
+          item.index = $scope.models.lists.Prospects.indexOf(item);
+          break;
+        case "Applied":
+          item.index = $scope.models.lists.Applied.indexOf(item);
+          break;
+        case "Pending":
+          item.index = $scope.models.lists.Pending.indexOf(item);
+          break;
+        case "Completed":
+          item.index = $scope.models.lists.Completed.indexOf(item);
+          break;
+    }
 
+    postFactory.editPost(item, function(){
+
+      for (var key in $scope.models.lists){
+        for (i in $scope.models.lists[key]){
+          if ($scope.models.lists[key][i] != null ){
+            var updating_object = $scope.models.lists[key][i];
+            updating_object.index = $scope.models.lists[key].indexOf(updating_object);
+            postFactory.editPost(updating_object,function(){
+            })
+          }
+        }
+      }
+    })
 
     $scope.open = function (size) {
 
@@ -49,8 +75,11 @@ $scope.get();
       size: size,
       resolve: {
       options: function () {
-        return ["Prospective","Applied","Pending","Completed"];
-      }
+        return ["Prospects","Applied","Pending","Completed"];
+        },
+      lists : function() {
+        return $scope.models.lists;
+        },
       }
       });
 
@@ -58,7 +87,7 @@ $scope.get();
         if (data.status == "Completed") {
           $scope.models.lists.Completed.push(data);
         }
-        if (data.status == "Prospective") {
+        if (data.status == "Prospects") {
           $scope.models.lists.Prospects.push(data);
         }
         if (data.status == "Applied") {
@@ -70,18 +99,19 @@ $scope.get();
         });
     };
 
-
 });
 
 
 
 
 
-myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory) {
+myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory,lists) {
   $scope.options = options;
 
+
+
   $scope.submitPost = function() {
-    postFactory.addPost($scope.newPost,function(data){
+    postFactory.addPost($scope.newPost,lists,function(data){
       $scope.newPost = {};
       $uibModalInstance.close(data);
     });
