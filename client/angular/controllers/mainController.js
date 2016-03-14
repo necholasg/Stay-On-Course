@@ -67,6 +67,26 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
     })
   }
 
+  $scope.edit = function(size,item){
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'editForm.html',
+      controller: 'ModalInstanceCtrl',
+      size:size,
+      resolve: {
+        options: function () {
+          return null;
+        },
+        lists : function() {
+          return null;
+        },
+        item: function(){
+          return item;
+        },
+      }
+    })
+  }
+
     $scope.open = function (size) {
 
       var modalInstance = $uibModal.open({
@@ -80,6 +100,9 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
         },
       lists : function() {
         return $scope.models.lists;
+        },
+      item: function(){
+        return null
         },
       }
       });
@@ -106,9 +129,20 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
 
 
 
-myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory,lists) {
-  $scope.options = options;
+myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,options,postFactory,lists,item) {
 
+  if (item){
+    $scope.newPost = item;
+  }
+  if (options){
+    $scope.options = options;
+  }
+
+  $scope.updatePost = function() {
+    postFactory.editPost($scope.newPost, function(){
+      $uibModalInstance.close('update');
+    })
+  };
 
 
   $scope.submitPost = function() {
