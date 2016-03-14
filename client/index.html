@@ -25,6 +25,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./static/css/main.css" media="screen" charset="utf-8">
     <!-- Bower Components -->
+    <script src="./bower_components/angular-scroll/angular-scroll.min.js"></script>
     <script src="./bower_components/ngToast/dist/ngToast.min.js"></script>
     <link rel="stylesheet" href="./bower_components/ngToast/dist/ngToast-animations.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="./bower_components/ngToast/dist/ngToast.css" media="screen" charset="utf-8">
@@ -57,14 +58,14 @@
           <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
             <ul class="nav navbar-nav">
 
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
+              <li><a href="#jobSearch" du-smooth-scroll><i class="fa fa-search"></i>  Job Search</a></li>
+              <li ng-controller='mainController'><a ng-click="scrollTop()">Back to top</a></li>
 
               <!-- Dropdown -->
-              <li uib-dropdown="">
+              <!-- <li uib-dropdown="">
                 <a href="#" uib-dropdown-toggle="">Dropdown<b class="caret"></b></a>
                 <tree tree="tree"></tree>
-              </li>
+              </li> -->
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

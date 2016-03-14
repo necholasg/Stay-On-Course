@@ -1,5 +1,5 @@
-myApp.controller('mainController', function($scope, $window, auth, postFactory,$uibModal){
-
+myApp.controller('mainController', function($scope, $window, auth, postFactory,$uibModal, $document){
+  var top = 0;
 
   $scope.posts = [];
 
@@ -7,6 +7,12 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
       selected: null,
       lists: {"Prospects": [], "Applied": [], "Pending":[], "Completed": []}
   };
+
+  $scope.scrollTop = function(){
+    console.log('test');
+    $document.scrollTop(top)
+  }
+
 
 
 

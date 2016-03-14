@@ -6,11 +6,13 @@
   </head>
   <body>
 
-    <div class="row fullpage">
+    <div id="top" class="row fullpage">
       <div class="col-md-12 page-header">
-        <h1>Demo: Simple Lists</h1>
-        <a ng-click="open('large')"><span class="glyphicon glyphicon-plus"></span></a>
+        <h1 class="inline">Job Board</h1>
+        <h4 class="pull-right">Add new Job</h4>
+        <a ng-click="open('large')" class="pull-right plusMargin"><i class="fa fa-plus fa-2x"></i></a>
       </div>
+      <hr>
 
 
         <div class="col-md-12">
@@ -42,7 +44,7 @@
   <hr>
   <!-- Job Search- -->
 
-    <div class="row" ng-controller="jobSearchController">
+    <div id="jobSearch" class="row" ng-controller="jobSearchController">
 
     <div class="col-md-12">
       <div class="page-header">
