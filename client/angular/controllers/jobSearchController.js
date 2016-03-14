@@ -48,8 +48,5 @@ myApp.controller('jobSearchController', function($scope, $window, storageFactory
     $scope.searchMe.$setPristine();
   }
 
-  storageFactory.allStates(function(data){
-    $scope.states = data[0].states
-    // console.log($scope.states);
-  })
+  $scope.states = getStates();
 });

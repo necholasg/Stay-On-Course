@@ -16,6 +16,7 @@
     <script src='./angular/factories/postFactory.js'></script>
     <script src='./angular/factories/authFactory.js'></script>
     <script src='./angular/factories/storageFactory.js'></script>
+    <script src="./static/js/states.js"></script>
     <!-- Controllers -->
     <script src='./angular/controllers/mainController.js'></script>
     <script src='./angular/controllers/loginController.js'></script>
@@ -94,28 +95,32 @@
           <form>
             <div class="form-group">
               <label for="job_title">Job Title:</label>
-              <input type="text" ng-model="newPost.job_title">
+              <input class="form-control" type="text" ng-model="newPost.job_title">
             </div>
             <div class="form-group">
               <label for="company_name">Company:</label>
-              <input type="text" ng-model="newPost.company_name">
+              <input class="form-control" type="text" ng-model="newPost.company_name">
             </div>
             <div class="form-group">
               <label for="location">Location:</label>
-              <input type="text" ng-model="newPost.location">
+              <input class="form-control" type="text" ng-model="newPost.location">
             </div>
             <div class="form-group">
               <label for="salary">Prospective Salary:</label>
-              <input type="text" ng-model="newPost.salary">
+              <input class="form-control" type="text" ng-model="newPost.salary">
             </div>
             <div class="form-group">
               <label for="url">URL:</label>
-              <input type="text" ng-model="newPost.url">
+              <input class="form-control" type="text" ng-model="newPost.url">
             </div>
             <div class="form-group">
               <label for="status">Status:</label>
-              <select ng-init="newPost.status = options[0]" ng-model="newPost.status" ng-options="option for option in options">
+              <select class="form-control" ng-init="newPost.status = options[0]" ng-model="newPost.status" ng-options="option for option in options">
               </select>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes:</label>
+              <textarea class="form-control" rows="5" ng-model="newPost.notes"></textarea>
             </div>
           </form>
 

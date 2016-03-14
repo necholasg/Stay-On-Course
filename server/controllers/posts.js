@@ -54,15 +54,15 @@ module.exports = {
   },
 
   updatePost: function(req, res){
-    console.log(req.body);
-    // Post.update(req.body, function(err, post){
-    //   if(err){
-    //     console.log('Error in update Posts');
-    //     res.json({status: 'error'})
-    //   }else{
-    //     res.json(post)
-    //   }
-    // })
+    Post.update({_id:req.body._id}, req.body, function(err, post){
+      if(err){
+        console.log('Error in update Posts');
+        res.json({status: 'error'})
+      }else{
+        console.log(post);
+        res.json(post)
+      }
+    })
   },
   deletePost: function(req, res){
     Post.remove({_id:req.params.id}, function(err, post){
