@@ -1,7 +1,7 @@
 # Stay-On-Course
 Tecnologies: MongoDB,Express.js,AngularJS, Node.js, angular-drag-and-drop-lists, ui-bootstrap, passport, ui-router, ng-toast
 
-*Quick and simple MEAN project to increase organizing job searching by using Angular-Drag-and-Drop-Lists as a primary feature. *
+*Quick and simple MEAN project to increase organizing job searching by using Angular-Drag-and-Drop-Lists as a primary feature.*
 
 - - - -
 
