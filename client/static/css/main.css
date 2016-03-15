@@ -1,8 +1,10 @@
 body{
 	margin:0;
 	padding: 0;
-	padding-top: 60px;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
+}
+.shift_padding{
+	padding-top:50px
 }
 .border{
 	border: red 1px solid;
@@ -27,12 +29,12 @@ ul[dnd-list] .dndDraggingSource {
 
 ul[dnd-list] .dndPlaceholder {
     display: block;
-    background-color: #ddd;
-    min-height: 42px;
+    background-color: #7A9CC6;
+    min-height: 50px;
 }
 
 ul[dnd-list] li {
-    background-color: #fff;
+    background-color: #FFFFA5;
     border: 1px solid #ddd;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -45,9 +47,22 @@ ul[dnd-list] li.selected {
     background-color: #dff0d8;
     color: #3c763d;
 }
-.fullpage{
+.postPage{
+	height: auto;
+	min-height: 98vh;
+	width: 100vw;
+	background-image: url("../images/wb.jpg");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.jobPage{
 	height: 100vh;
-	width: 100%;
+	width: 100vw;
+	background-image: url("../images/cork.jpg");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 .inline{
 	display: inline;
@@ -56,4 +71,37 @@ ul[dnd-list] li.selected {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	margin-right: 5px;
+}
+.plusMargin:hover{
+	cursor: pointer;
+}
+.jobBoard{
+	background-color:white;
+	opacity:0.9;
+}
+
+.jobpanels{
+	animation-duration: 4s;
+	animation-delay: 0s;
+}
+#loginPage{
+	height: 100vh;
+	width: 100vw;
+	padding-top: 5%;
+	background-image: url("../images/main.jpg");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#login_form{
+	color:white;
+}
+
+#registration_form{
+	color:white;
+}
+
+#loginlink{
+	color:white;
 }

@@ -1,56 +1,59 @@
 <body>
+	<div id='loginPage'>
+		<div class="container" ng-controller="authController">
+			<div class="jumbotron">
+				<h1>Stay On Course</h1>
+	    	<p>The resource to help you organize and land your dream Job</p>
+			</div>
+			<div id="login_form" ng-show="!show_registration">
+				<h1>Login</h1>
+				<form role="form" ng-submit="logIn()">
+					<div class="form-group">
+						<label for="username">Username:</label>
+			    		<input type="text" class="form-control" ng-model="login_user.username">
+			  		</div>
+			  		<div class="form-group">
+						<label for="password">Password:</label>
+			    		<input type="password" class="form-control" ng-model="login_user.password">
+			  		</div>
+			  		<button type="submit" class="btn btn-primary">Login</button>
+			  </form>
+			</div>
 
-	<div class="container" ng-controller="authController">
-		<div class="jumbotron">
-			<h1>Stay On Course</h1>
-    	<p>The resource to help you land the Job or some shit like that</p>
+			<div id="registration_form" ng-hide="!show_registration">
+				<h1>Register</h1>
+			  	<form role="form" ng-submit="register()">
+			  		<div class="form-group">
+						<label for="username">Username:</label>
+			    		<input type="username" class="form-control" ng-model="new_user.username">
+			  		</div>
+					<div class="form-group">
+						<label for="email">Email Address:</label>
+			    		<input type="email" class="form-control" ng-model="new_user.email">
+			  		</div>
+			  		<div class="form-group">
+						<label for="password">Password:</label>
+			    		<input type="password" class="form-control" ng-model="new_user.password">
+			  		</div>
+			  		<div class="form-group">
+						<label for="confirm_password">Confirm Password:</label>
+			    		<input type="password" class="form-control" ng-model="new_user.confirm_password">
+			  		</div>
+			  		<button type="submit" class="btn btn-primary">Register</button>
+			  	</form>
+			</div>
+
+			<br>
+
+			<a id="loginlink"style="cursor:pointer;" ng-click="show_registration = !show_registration"><span ng-if="!show_registration">Create Account</span><span ng-if="show_registration">Login</span></a>
+
+			<div ng-show="error" class="alert alert-danger row">
+				<span ng-if="!error.message">{{ error }}</span>
+				<span>{{ error.message }}</span>
+			</div>
+
 		</div>
-		<div id="login_form" ng-show="!show_registration">
-			<h1>Login</h1>
-			<form role="form" ng-submit="logIn()">
-				<div class="form-group">
-					<label for="username">Username:</label>
-		    		<input type="text" class="form-control" ng-model="login_user.username">
-		  		</div>
-		  		<div class="form-group">
-					<label for="password">Password:</label>
-		    		<input type="password" class="form-control" ng-model="login_user.password">
-		  		</div>
-		  		<button type="submit" class="btn btn-primary">Login</button>
-		  </form>
-		</div>
-
-		<div id="registration_form" ng-hide="!show_registration">
-			<h1>Register</h1>
-		  	<form role="form" ng-submit="register()">
-		  		<div class="form-group">
-					<label for="username">Username:</label>
-		    		<input type="username" class="form-control" ng-model="new_user.username">
-		  		</div>
-				<div class="form-group">
-					<label for="email">Email Address:</label>
-		    		<input type="email" class="form-control" ng-model="new_user.email">
-		  		</div>
-		  		<div class="form-group">
-					<label for="password">Password:</label>
-		    		<input type="password" class="form-control" ng-model="new_user.password">
-		  		</div>
-		  		<div class="form-group">
-					<label for="confirm_password">Confirm Password:</label>
-		    		<input type="password" class="form-control" ng-model="new_user.confirm_password">
-		  		</div>
-		  		<button type="submit" class="btn btn-primary">Register</button>
-		  	</form>
-		</div>
-
-		<br>
-
-		<a style="cursor:pointer;" ng-click="show_registration = !show_registration"><span ng-if="!show_registration">Create Account</span><span ng-if="show_registration">Login</span></a>
-
-		<div ng-show="error" class="alert alert-danger row">
-			<span ng-if="!error.message">{{ error }}</span>
-			<span>{{ error.message }}</span>
-		</div>
-
 	</div>
+
+
 </body>

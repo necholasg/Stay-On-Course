@@ -17,7 +17,6 @@ myApp.controller('jobSearchController', function($scope, $window, storageFactory
       $scope.jobSearch.state = $scope.jobSearch.state.abbreviation;
     };
     storageFactory.newSearch($scope.jobSearch, function(data){
-      // console.log(data);
       $scope.jobs = [];
       if(data.length === 0){
         console.log("nothing to display");

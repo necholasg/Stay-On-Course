@@ -8,17 +8,6 @@ var auth = jwt({secret: secret, userProperty: 'payload'});
 
 module.exports = {
 
-  getStates: function(req, res){
-    State.find({}, function(err, states){
-      if(err){
-        console.log('Error in get states');
-        res.json({status: 'error'})
-      }else{
-        // console.log(states);
-        res.json(states)
-      }
-    })
-  },
   newPost: function(req, res){
     var new_post = new Post(req.body)
     new_post.save(function(err, post){
@@ -37,18 +26,6 @@ module.exports = {
       }else{
         res.json(posts)
       }
-    })
-  },
-
-  getLast: function(req,res){
-    Post.findOne({_user: req.params._id}, {}, { sort: { 'created_at' : -1 } }, function(err,post){
-        if(err){
-          console.log('Error in get Posts');
-          res.json({status: 'error'})
-        }
-        else{
-          res.json(post);
-        }
     })
   },
 

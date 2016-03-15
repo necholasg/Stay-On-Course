@@ -1,4 +1,6 @@
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate', 'ngToast', 'ngSanitize', 'dndLists', 'duScroll']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'ui.navbar', 'jcs-autoValidate', 'ngAnimate', 'ngToast', 'ngSanitize', 'dndLists', 'duScroll'])
+.value('duScrollDuration', 1000)
+ .value('duScrollOffset', 30);
 
 
 myApp.run(function(defaultErrorMessageResolver){
@@ -25,7 +27,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('index',{
         url: '/',
         templateUrl: 'static/partials/login.html',
-        controller:'loginController',
         onEnter: function($state, auth){
           if(auth.isLoggedIn()){
             $state.go('home');
@@ -42,18 +43,5 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
           }
         }
     })
-
-// ---------------Example Route--------------------------
-
-    // .state('admin',{
-    //     url: '/admin',
-    //     templateUrl: 'static/partials/admin.html',
-    //     controller: 'authCtrl',
-    //     onEnter: function($state, auth){
-    //       if(auth.isLoggedIn()){
-    //         $state.go('admin2');
-    //       }
-    //     }
-    // })
 
 });

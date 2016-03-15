@@ -47,20 +47,15 @@ module.exports = function(app){
     use.getPosts(req, res)
   });
 
-  app.get('/lastpost/:_id',function(req,res){
-    use.getLast(req,res)
-  })
-
   app.post('/posts/edit/', function(req, res){
     use.updatePost(req, res)
   });
 
   app.get('/posts/delete/:id', function(req, res){
-    use.deleteName(req, res)
+    use.deletePost(req, res)
   });
 
   app.post('/register', function(req, res, next){
-    // console.log(req.body);
     use.newReg(req, res, next)
   });
 

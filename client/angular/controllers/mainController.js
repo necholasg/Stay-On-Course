@@ -1,6 +1,8 @@
 myApp.controller('mainController', function($scope, $window, auth, postFactory,$uibModal, $document){
   var top = 0;
-
+  var duration = 1000;
+  $scope.show_registration = false;
+  $scope.isLoggedIn = auth.isLoggedIn;
   $scope.posts = [];
 
   $scope.models = {
@@ -10,7 +12,7 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
 
   $scope.scrollTop = function(){
     console.log('test');
-    $document.scrollTop(top)
+    $document.scrollTop(top, duration)
   }
 
 
@@ -46,20 +48,39 @@ myApp.controller('mainController', function($scope, $window, auth, postFactory,$
     switch(item.status){
         case "Prospects":
           item.index = $scope.models.lists.Prospects.indexOf(item);
+          $scope.models.lists.Prospects[item.index].index = item.index;
           break;
         case "Applied":
           item.index = $scope.models.lists.Applied.indexOf(item);
+          $scope.models.lists.Applied[item.index].index = item.index;
           break;
         case "Pending":
           item.index = $scope.models.lists.Pending.indexOf(item);
+          $scope.models.lists.Pending[item.index].index = item.index;
           break;
         case "Completed":
           item.index = $scope.models.lists.Completed.indexOf(item);
+          $scope.models.lists.Completed[item.index].index = item.index;
           break;
     }
 
     postFactory.editPost(item, function(){
 
+      for (var key in $scope.models.lists){
+        for (i in $scope.models.lists[key]){
+          if ($scope.models.lists[key][i] != null ){
+            var updating_object = $scope.models.lists[key][i];
+            updating_object.index = $scope.models.lists[key].indexOf(updating_object);
+            postFactory.editPost(updating_object,function(){
+            })
+          }
+        }
+      }
+    })
+  }
+
+  $scope.delete = function(item){
+    postFactory.delete(item,function(){
       for (var key in $scope.models.lists){
         for (i in $scope.models.lists[key]){
           if ($scope.models.lists[key][i] != null ){

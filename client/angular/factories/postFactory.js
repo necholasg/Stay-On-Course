@@ -33,22 +33,11 @@ myApp.factory('postFactory', function($http, $state, auth){
   factory.allPosts = function(callback){
     $http.get('/posts/' + auth.currentUserID()).success(function(res){
       if(res.status == 'error'){
-        console.log('error in loading names');
       }else{
         posts = res;
         callback(posts);
       };
     });
-  };
-
-  factory.getLast = function(callback){
-    $http.get('/lastpost/' + auth.currentUserID()).success(function(res){
-      if(res.status == 'error'){
-        console.log('error in loading names');
-      }else{
-        callback(res);
-      };
-    })
   };
 
   factory.editPost = function(post, callback){
