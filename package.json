@@ -2,7 +2,7 @@
   "name": "myTemplate",
   "version": "1.0.0",
   "description": "a template for MEAN",
-  "main": "index.html",
+  "main": "server.js",
   "author": "Me",
   "license": "ISC",
   "dependencies": {
